@@ -39,19 +39,19 @@ describe Gitlab::Auth::RequestAuthenticator do
 
   describe '#find_sessionless_user' do
     let!(:access_token_user) { build(:user) }
-    let!(:rss_token_user) { build(:user) }
+    let!(:rss_or_ics_token_user) { build(:user) }
 
     it 'returns access_token user first' do
       allow_any_instance_of(described_class).to receive(:find_user_from_access_token).and_return(access_token_user)
-      allow_any_instance_of(described_class).to receive(:find_user_from_rss_token).and_return(rss_token_user)
+      allow_any_instance_of(described_class).to receive(:find_user_from_rss_or_ics_token).and_return(rss_or_ics_token_user)
 
       expect(subject.find_sessionless_user).to eq access_token_user
     end
 
-    it 'returns rss_token user if no access_token user found' do
-      allow_any_instance_of(described_class).to receive(:find_user_from_rss_token).and_return(rss_token_user)
+    it 'returns rss_token or ics_token user if no access_token user found' do
+      allow_any_instance_of(described_class).to receive(:find_user_from_rss_or_ics_token).and_return(rss_or_ics_token_user)
 
-      expect(subject.find_sessionless_user).to eq rss_token_user
+      expect(subject.find_sessionless_user).to eq rss_or_ics_token_user
     end
 
     it 'returns nil if no user found' do

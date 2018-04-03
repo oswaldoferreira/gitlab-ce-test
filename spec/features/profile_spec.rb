@@ -74,6 +74,24 @@ describe 'Profile account page', :js do
     end
   end
 
+  describe 'when I reset ics token' do
+    before do
+      visit profile_personal_access_tokens_path
+    end
+
+    it 'resets ics token' do
+      within('.ics-token-reset') do
+        previous_token = find("#ics_token").value
+
+        accept_confirm { click_link('reset it') }
+
+        expect(find('#ics_token').value).not_to eq(previous_token)
+      end
+
+      expect(page).to have_content 'Calendar token was successfully reset'
+    end
+  end
+
   describe 'when I reset incoming email token' do
     before do
       allow(Gitlab.config.incoming_email).to receive(:enabled).and_return(true)

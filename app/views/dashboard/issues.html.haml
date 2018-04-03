@@ -7,8 +7,10 @@
 .top-area
   = render 'shared/issuable/nav', type: :issues
   .nav-controls
-    = link_to params.merge(rss_url_options), class: 'btn has-tooltip', data: { container: 'body' }, title: 'Subscribe' do
+    = link_to params.merge(rss_url_options), class: 'btn has-tooltip', data: { container: 'body' }, title: 'Subscribe to feed' do
       = icon('rss')
+    = link_to params.merge(calendar_url_options), class: 'btn has-tooltip', data: { container: 'body' }, title: 'Subscribe to calendar' do
+      = icon('calendar')
     = render 'shared/new_project_item_select', path: 'issues/new', label: "New issue", with_feature_enabled: 'issues', type: :issues
 
 = render 'shared/issuable/filter', type: :issues

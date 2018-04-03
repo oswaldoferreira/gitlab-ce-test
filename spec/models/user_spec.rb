@@ -618,6 +618,16 @@ describe User do
     end
   end
 
+  describe 'ics token' do
+    it 'ensures an ics token on read' do
+      user = create(:user, ics_token: nil)
+      ics_token = user.ics_token
+
+      expect(ics_token).not_to be_blank
+      expect(user.reload.ics_token).to eq ics_token
+    end
+  end
+
   describe '#recently_sent_password_reset?' do
     it 'is false when reset_password_sent_at is nil' do
       user = build_stubbed(:user, reset_password_sent_at: nil)

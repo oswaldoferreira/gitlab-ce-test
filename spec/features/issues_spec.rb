@@ -340,6 +340,20 @@ describe 'Issues' do
             expect(page).to have_content('baz')
           end
         end
+
+        it 'filters by due in six weeks period' do
+          foo.update(due_date: Date.today - 4.weeks)
+          bar.update(due_date: Date.today + 4.weeks)
+          baz.update(due_date: Date.yesterday)
+
+          visit project_issues_path(project, due_date: Issue::DueInSixWeeksPeriod.name)
+
+          page.within '.issues-holder' do
+            expect(page).not_to have_content('foo')
+            expect(page).not_to have_content('bar')
+            expect(page).to have_content('baz')
+          end
+        end
       end
 
       describe 'sorting by milestone' do

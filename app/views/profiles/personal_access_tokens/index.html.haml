@@ -47,6 +47,24 @@
       = link_to 'reset it', [:reset, :rss_token, :profile], method: :put, data: { confirm: 'Are you sure? Any RSS URLs currently in use will stop working.' }
       if that ever happens.
 
+%hr
+.row.prepend-top-default
+  .col-lg-4.profile-settings-sidebar
+    %h4.prepend-top-0
+      Calendar token
+    %p
+      Your calendar token is used to authenticate you when your calendar application loads a personalized calendar, and is included in your personal calendar URL.
+    %p
+      It cannot be used to access any other data.
+  .col-lg-8.ics-token-reset
+    = label_tag :ics_token, 'Calendar token', class: "label-light"
+    = text_field_tag :ics_token, current_user.ics_token, class: 'form-control', readonly: true, onclick: 'this.select()'
+    %p.help-block
+      Keep this token secret. Anyone who gets a hold of it can read your calendar feed as if they were you.
+      You should
+      = link_to 'reset it', [:reset, :ics_token, :profile], method: :put, data: { confirm: 'Are you sure? Any calendar URL currently in use will stop working.' }
+      if that ever happens.
+
 - if incoming_email_token_enabled?
   %hr
   .row.prepend-top-default

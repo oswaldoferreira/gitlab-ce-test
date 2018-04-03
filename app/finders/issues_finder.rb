@@ -75,6 +75,8 @@ class IssuesFinder < IssuableFinder
         items = items.due_between(Date.today.beginning_of_week, Date.today.end_of_week)
       elsif filter_by_due_this_month?
         items = items.due_between(Date.today.beginning_of_month, Date.today.end_of_month)
+      elsif filter_by_due_in_six_weeks_period?
+        items = items.due_between(Date.today - 3.weeks, (Date.today + 3.weeks))
       end
     end
 
@@ -95,6 +97,10 @@ class IssuesFinder < IssuableFinder
 
   def filter_by_due_this_month?
     due_date? && params[:due_date] == Issue::DueThisMonth.name
+  end
+
+  def filter_by_due_in_six_weeks_period?
+    due_date? && params[:due_date] == Issue::DueInSixWeeksPeriod.name
   end
 
   def due_date?

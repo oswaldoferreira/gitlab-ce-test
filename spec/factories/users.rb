@@ -14,6 +14,10 @@ FactoryBot.define do
 
     before(:create) do |user|
       user.ensure_rss_token
+      # NOTE: it would be better to call ensure_ics_token too for consistency
+      #       but it breaks tests where the migration is fixed.
+      #       eg. Gitlab::BackgroundMigration::CreateGpgKeySubkeysFromGpgKeys
+      # user.ensure_ics_token
     end
 
     trait :admin do

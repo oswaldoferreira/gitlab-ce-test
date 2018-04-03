@@ -8,6 +8,7 @@ resource :profile, only: [:show, :update] do
 
     put :reset_incoming_email_token
     put :reset_rss_token
+    put :reset_ics_token
     put :update_username
   end
 
