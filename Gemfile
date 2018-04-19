@@ -139,24 +139,6 @@ gem 'truncato', '~> 0.7.9'
 gem 'bootstrap_form', '~> 2.7.0'
 gem 'nokogiri', '~> 1.8.2'
 
-# Calendar rendering
-# gem 'icalendar'
-
-# Diffs
-gem 'diffy', '~> 3.1.0'
-
-# Application server
-group :unicorn do
-  gem 'unicorn', '~> 5.1.0'
-  gem 'unicorn-worker-killer', '~> 0.4.4'
-end
-
-# State machine
-gem 'state_machines-activerecord', '~> 0.4.0'
-
-# Issue tags
-gem 'acts-as-taggable-on', '~> 5.0'
-
 # Background jobs
 gem 'sidekiq', '~> 5.0'
 gem 'sidekiq-cron', '~> 0.6.0'
