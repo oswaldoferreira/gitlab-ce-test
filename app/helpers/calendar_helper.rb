@@ -1,9 +1,9 @@
 require 'icalendar'
 
 module CalendarHelper
-  def calendar_url_options
-    { format: :ics, ics_token: current_user.try(:ics_token), due_date: Issue::DueInSixWeeksPeriod.name }
-  end
+  # def calendar_url_options
+  #   { format: :ics, ics_token: current_user.try(:ics_token), due_date: Issue::DueInSixWeeksPeriod.name }
+  # end
 
   def calendar
     cal = Icalendar::Calendar.new
