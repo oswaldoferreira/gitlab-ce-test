@@ -35,5 +35,9 @@ Due dates also appear in your [todos list](../../../workflow/todos.md).
 
 ![Issues with due dates in the todos](img/due_dates_todos.png)
 
+Issues with due dates can also be exported in an iCalendar feed by clicking on
+the _Subscribe to calendar_ icon on the **Assigned Issues** page that is
+linked on the right-hand side of the GitLab header.
+
 [ce-3614]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/3614
 [permissions]: ../../permissions.md#project

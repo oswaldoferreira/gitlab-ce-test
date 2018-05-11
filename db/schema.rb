@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180309160427) do
+ActiveRecord::Schema.define(version: 20180315141051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1939,6 +1939,7 @@ ActiveRecord::Schema.define(version: 20180309160427) do
     t.string "preferred_language"
     t.string "rss_token"
     t.integer "theme_id", limit: 2
+    t.string "ics_token"
   end
 
   add_index "users", ["admin"], name: "index_users_on_admin", using: :btree
@@ -1947,6 +1948,7 @@ ActiveRecord::Schema.define(version: 20180309160427) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email_trigram", using: :gin, opclasses: {"email"=>"gin_trgm_ops"}
   add_index "users", ["ghost"], name: "index_users_on_ghost", using: :btree
+  add_index "users", ["ics_token"], name: "index_users_on_ics_token", using: :btree
   add_index "users", ["incoming_email_token"], name: "index_users_on_incoming_email_token", using: :btree
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
   add_index "users", ["name"], name: "index_users_on_name_trigram", using: :gin, opclasses: {"name"=>"gin_trgm_ops"}

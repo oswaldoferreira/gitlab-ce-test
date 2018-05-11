@@ -46,7 +46,7 @@ describe Gitlab::Auth::UserAuthFinders do
     end
   end
 
-  describe '#find_user_from_rss_token' do
+  describe '#find_user_from_rss_or_ics_token' do
     context 'when the request format is atom' do
       before do
         env['HTTP_ACCEPT'] = 'application/atom+xml'
@@ -55,17 +55,29 @@ describe Gitlab::Auth::UserAuthFinders do
       it 'returns user if valid rss_token' do
         set_param(:rss_token, user.rss_token)
 
-        expect(find_user_from_rss_token).to eq user
+        expect(find_user_from_rss_or_ics_token).to eq user
       end
 
-      it 'returns nil if rss_token is blank' do
-        expect(find_user_from_rss_token).to be_nil
+      it 'returns user if valid ics_token' do
+        set_param(:ics_token, user.ics_token)
+
+        expect(find_user_from_rss_or_ics_token).to eq user
+      end
+
+      it 'returns nil if rss_token or ics_token is blank' do
+        expect(find_user_from_rss_or_ics_token).to be_nil
       end
 
       it 'returns exception if invalid rss_token' do
         set_param(:rss_token, 'invalid_token')
 
-        expect { find_user_from_rss_token }.to raise_error(Gitlab::Auth::UnauthorizedError)
+        expect { find_user_from_rss_or_ics_token }.to raise_error(Gitlab::Auth::UnauthorizedError)
+      end
+
+      it 'returns exception if invalid ics_token' do
+        set_param(:ics_token, 'invalid_token')
+
+        expect { find_user_from_rss_or_ics_token }.to raise_error(Gitlab::Auth::UnauthorizedError)
       end
     end
 
@@ -73,7 +85,7 @@ describe Gitlab::Auth::UserAuthFinders do
       it 'returns nil' do
         set_param(:rss_token, user.rss_token)
 
-        expect(find_user_from_rss_token).to be_nil
+        expect(find_user_from_rss_or_ics_token).to be_nil
       end
     end
 
@@ -81,7 +93,7 @@ describe Gitlab::Auth::UserAuthFinders do
       it 'the method call does not modify the original value' do
         env['action_dispatch.request.formats'] = nil
 
-        find_user_from_rss_token
+        find_user_from_rss_or_ics_token
 
         expect(env['action_dispatch.request.formats']).to be_nil
       end

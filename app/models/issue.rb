@@ -14,12 +14,13 @@ class Issue < ActiveRecord::Base
 
   ignore_column :assignee_id, :branch_name, :deleted_at
 
-  DueDateStruct = Struct.new(:title, :name).freeze
-  NoDueDate     = DueDateStruct.new('No Due Date', '0').freeze
-  AnyDueDate    = DueDateStruct.new('Any Due Date', '').freeze
-  Overdue       = DueDateStruct.new('Overdue', 'overdue').freeze
-  DueThisWeek   = DueDateStruct.new('Due This Week', 'week').freeze
-  DueThisMonth  = DueDateStruct.new('Due This Month', 'month').freeze
+  DueDateStruct       = Struct.new(:title, :name).freeze
+  NoDueDate           = DueDateStruct.new('No Due Date', '0').freeze
+  AnyDueDate          = DueDateStruct.new('Any Due Date', '').freeze
+  Overdue             = DueDateStruct.new('Overdue', 'overdue').freeze
+  DueThisWeek         = DueDateStruct.new('Due This Week', 'week').freeze
+  DueThisMonth        = DueDateStruct.new('Due This Month', 'month').freeze
+  DueInSixWeeksPeriod = DueDateStruct.new('Due In 6 Weeks Period', '6_weeks_period').freeze
 
   belongs_to :project
   belongs_to :moved_to, class_name: 'Issue'

@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
 
   add_authentication_token_field :incoming_email_token
   add_authentication_token_field :rss_token
+  add_authentication_token_field :ics_token
 
   default_value_for :admin, false
   default_value_for(:external) { Gitlab::CurrentSettings.user_default_external }
@@ -1133,6 +1134,11 @@ class User < ActiveRecord::Base
   # solution.
   def rss_token
     ensure_rss_token!
+  end
+
+  # same applies for `ics_token`
+  def ics_token
+    ensure_ics_token!
   end
 
   def sync_attribute?(attribute)

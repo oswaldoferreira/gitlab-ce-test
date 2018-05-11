@@ -166,6 +166,10 @@ describe ProfilesController, "routing" do
     expect(put("/profile/reset_rss_token")).to route_to('profiles#reset_rss_token')
   end
 
+  it "to #reset_ics_token" do
+    expect(put("/profile/reset_ics_token")).to route_to('profiles#reset_ics_token')
+  end
+
   it "to #show" do
     expect(get("/profile")).to route_to('profiles#show')
   end

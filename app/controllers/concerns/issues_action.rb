@@ -13,6 +13,7 @@ module IssuesAction
     respond_to do |format|
       format.html
       format.atom { render layout: 'xml.atom' }
+      format.ics
     end
   end
   # rubocop:enable Gitlab/ModuleWithInstanceVariables
